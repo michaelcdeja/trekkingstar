@@ -1,5 +1,5 @@
 {
-  "name": "@plentymarkets/plentyshop-pwa",
+  "name": "trekkingstar",
   "version": "1.2.0",
   "private": true,
   "license": "MIT",
@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "prepare": "is-ci || husky install",
-    "//update:sdk": "yarn up @plentymarkets/shop-api",
     "setup": "yarn && yarn build && yarn dev",
     "turbo:disable-telemetry": "turbo telemetry disable",
     "build": "yarn turbo:disable-telemetry && turbo run build",
@@ -31,7 +30,6 @@
     "lhci:mobile": "lhci autorun"
   },
   "dependencies": {
-    "//@plentymarkets/shop-api": "^0.58.0",
     "@types/applepayjs": "^14.0.8",
     "@vee-validate/nuxt": "^4.13.1",
     "@vee-validate/yup": "^4.13.1",
