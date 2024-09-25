@@ -1,140 +1,165 @@
 <template>
+  <!-- Zusätzliche Leiste über dem Header -->
+  <div class="bg-gray-900 text-gray-100 py-2">
+    <div class="container mx-auto flex justify-center items-center flex-wrap text-xs space-x-8">
+      <!-- Icons und Text zentriert -->
+      <!-- Versandkostenfrei -->
+      <div class="flex items-center">
+        <a href="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/box.svg" target="_blank" class="mr-1">
+          <img src="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/box.svg" alt="Versandkostenfrei" class="w-4 h-4">
+        </a>
+        <div class="flex flex-col leading-tight">
+          <span>Versandkostenfrei</span>
+          <span>ab 39,95 € in DE & AT</span>
+        </div>
+      </div>
+
+      <!-- Kostenfreie Rücksendung -->
+      <div class="flex items-center">
+        <a href="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/arrows.svg" target="_blank" class="mr-1">
+          <img src="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/arrows.svg" alt="Rücksendung Icon" class="w-4 h-4">
+        </a>
+        <div class="flex flex-col leading-tight">
+          <span>Kostenfreie</span>
+          <span>Rücksendung</span>
+        </div>
+      </div>
+
+      <!-- 30 Tage Rückgaberecht -->
+      <div class="flex items-center">
+        <a href="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/reload.svg" target="_blank" class="mr-1">
+          <img src="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/reload.svg" alt="Rückgaberecht Icon" class="w-4 h-4">
+        </a>
+        <div class="flex flex-col leading-tight">
+          <span>30 Tage</span>
+          <span>Rückgaberecht</span>
+        </div>
+      </div>
+
+      <!-- Rechnungskauf/Ratenkauf -->
+      <div class="flex items-center">
+        <a href="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/page.svg" target="_blank" class="mr-1">
+          <img src="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/page.svg" alt="Rechnungskauf/Ratenkauf Icon" class="w-4 h-4">
+        </a>
+        <div class="flex flex-col leading-tight">
+          <span>Rechnungskauf</span>
+          <span>/Ratenkauf</span>
+        </div>
+      </div>
+
+      <!-- Positive Bewertungen -->
+      <div class="flex items-center">
+        <a href="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/tag.svg" target="_blank" class="mr-1">
+          <img src="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/tag.svg" alt="Positive Bewertungen Icon" class="w-4 h-4">
+        </a>
+        <div class="flex flex-col leading-tight">
+          <span>Über 100.000</span>
+          <span>positive Bewertungen</span>
+        </div>
+      </div>
+
+      <!-- Telefonkontakt -->
+      <div class="flex items-center">
+        <a href="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/phone.svg" target="_blank" class="mr-1">
+          <img src="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/header/phone.svg" alt="Telefon Icon" class="w-4 h-4">
+        </a>
+        <div class="flex flex-col leading-tight">
+          <span>+49 (0)209 - 728 47</span>
+          <span>(Mo - Fr: 8:00 - 16:30 Uhr)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MegaMenu-Komponente mit Logo zentriert -->
   <MegaMenu :categories="categoryTree">
     <template v-if="viewport.isGreaterOrEquals('md')">
-      <UiSearch class="hidden md:block flex-1" />
-      <nav class="hidden ml-4 md:flex md:flex-row md:flex-nowrap">
-        <UiButton
-          v-if="!isLanguageSelectOpen"
-          class="group relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 mr-1 -ml-0.5 rounded-md cursor-pointer"
-          :aria-label="t('languageSelector')"
-          variant="tertiary"
-          square
-          data-testid="open-languageselect-button"
-          @click="toggleLanguageSelect()"
-        >
-          <template #prefix>
-            <SfIconLanguage class="relative" />
-          </template>
-        </UiButton>
-        <UiButton
-          v-else
-          class="group relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 mr-1 -ml-0.5 rounded-md cursor-pointer"
-          :aria-label="t('languageSelector')"
-          variant="tertiary"
-          square
-          data-testid="open-languageselect-button"
-        >
-          <template #prefix>
-            <SfIconLanguage class="relative" />
-          </template>
-        </UiButton>
-        <UiButton
-          class="group relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 mr-1 -ml-0.5 rounded-md"
-          :tag="NuxtLink"
-          :to="localePath(paths.wishlist)"
-          :aria-label="t('numberInWishlist', { count: wishlistItemIds.length })"
-          variant="tertiary"
-          square
-          data-testid="wishlist-page-navigation"
-        >
-          <template #prefix>
-            <SfIconFavorite />
-            <SfBadge
-              :content="wishlistItemIds.length"
-              class="outline outline-primary-500 bg-white !text-neutral-900 group-hover:outline-primary-800 group-active:outline-primary-700 flex justify-center text-xs !leading-3"
-              data-testid="wishlist-badge"
-            />
-          </template>
-        </UiButton>
-        <UiButton
-          class="group relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 mr-1 -ml-0.5 rounded-md"
-          :tag="NuxtLink"
-          :to="localePath(paths.cart)"
-          :aria-label="t('numberInCart', { count: cartItemsCount })"
-          variant="tertiary"
-          square
-        >
-          <template #prefix>
-            <SfIconShoppingCart />
-            <SfBadge
-              :content="cartItemsCount"
-              class="outline outline-primary-500 bg-white !text-neutral-900 group-hover:outline-primary-800 group-active:outline-primary-700 flex justify-center text-xs !leading-3"
-              data-testid="cart-badge"
-            />
-          </template>
-        </UiButton>
-        <SfDropdown v-if="isAuthorized" v-model="isAccountDropdownOpen" placement="bottom-end" class="z-50">
-          <template #trigger>
+      <div class="mx-auto w-[80%] bg-white flex items-center justify-center">
+        <!-- Logo und Suche zentriert -->
+        <div class="flex items-center justify-center w-full">
+          <!-- Logo -->
+          <div class="flex justify-center mr-8"> <!-- Vergrößerter Abstand mit mr-8 -->
+            <NuxtImg src="https://cdn02.plentymarkets.com/gfckbh0ooc5t/frontend/logo/trekking-star.png" alt="Trekking Star Logo" class="w-[210px] h-[80px] py-2" preload />
+          </div>
+          
+          <!-- Verkleinerte Suchleiste -->
+          <UiSearch class="flex-1 w-[50%] md:w-[30%]" />
+
+          <!-- Sprachwahl und Wunschliste -->
+          <div class="flex space-x-4 ml-4">
+            <!-- Sprachwahl -->
             <UiButton
+              v-if="!isLanguageSelectOpen"
+              class="group relative text-black hover:text-orange-500 active:text-orange-700 rounded-md cursor-pointer"
+              :aria-label="t('languageSelector')"
               variant="tertiary"
-              class="relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 rounded-md"
-              :class="{ 'bg-primary-700': isAccountDropdownOpen }"
-              @click="accountDropdownToggle()"
-              data-testid="account-dropdown-button"
+              square
+              data-testid="open-languageselect-button"
+              @click="toggleLanguageSelect"
             >
               <template #prefix>
-                <SfIconPerson />
+                <SfIconLanguage class="relative" />
               </template>
-              {{ user.user?.firstName }}
             </UiButton>
-          </template>
-          <ul class="rounded bg-white shadow-md border border-neutral-100 text-neutral-900 min-w-[152px] py-2">
-            <li v-for="({ label, link }, labelIndex) in accountDropdown" :key="`label-${labelIndex}`">
-              <template v-if="label === t('account.logout')">
-                <UiDivider class="my-2" />
-                <SfListItem tag="button" class="text-left" data-testid="account-dropdown-logout-item" @click="logOut()">
-                  {{ label }}
-                </SfListItem>
+
+            <!-- Wunschliste -->
+            <UiButton
+              class="group relative text-black hover:text-orange-500 active:text-orange-700 rounded-md"
+              :tag="NuxtLink"
+              :to="localePath(paths.wishlist)"
+              :aria-label="t('numberInWishlist', { count: wishlistItemIds.length })"
+              variant="tertiary"
+              square
+              data-testid="wishlist-page-navigation"
+            >
+              <template #prefix>
+                <SfIconFavorite />
+                <SfBadge
+                  :content="wishlistItemIds.length"
+                  class="outline outline-primary-500 bg-white !text-neutral-900 group-hover:outline-primary-800 group-active:outline-primary-700 flex justify-center text-xs !leading-3"
+                  data-testid="wishlist-badge"
+                />
               </template>
-              <SfListItem
-                v-else
-                :tag="NuxtLink"
-                :to="link"
-                :class="{ 'bg-neutral-200': route.path === link }"
-                data-testid="account-dropdown-list-item"
-              >
-                {{ label }}
-              </SfListItem>
-            </li>
-          </ul>
-        </SfDropdown>
-        <UiButton
-          v-else
-          @click="openAuthentication"
-          class="group relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 mr-1 -ml-0.5 rounded-md"
-          variant="tertiary"
-          :aria-label="t('auth.login.openLoginForm')"
-          square
-        >
-          <SfIconPerson />
-        </UiButton>
-        <UiButton
-          v-if="showConfigurationDrawer"
-          @click="open = true"
-          class="group relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 mr-1 -ml-0.5 rounded-md"
-          variant="tertiary"
-          :aria-label="t('openConfigurationDrawer')"
-          square
-        >
-          <SfIconTune />
-        </UiButton>
-      </nav>
+            </UiButton>
+
+            <!-- Warenkorb -->
+            <UiButton
+              class="group relative text-black hover:text-orange-500 active:text-orange-700 rounded-md"
+              :tag="NuxtLink"
+              :to="localePath(paths.cart)"
+              :aria-label="t('numberInCart', { count: cartItemsCount })"
+              variant="tertiary"
+              square
+            >
+              <template #prefix>
+                <SfIconShoppingCart />
+                <SfBadge
+                  :content="cartItemsCount"
+                  class="outline outline-primary-500 bg-white !text-neutral-900 group-hover:outline-primary-800 group-active:outline-primary-700 flex justify-center text-xs !leading-3"
+                  data-testid="cart-badge"
+                />
+              </template>
+            </UiButton>
+          </div>
+        </div>
+      </div>
     </template>
 
-    <div v-if="viewport.isLessThan('lg')">
+    <!-- Mobile Ansicht -->
+    <div v-if="viewport.isLessThan('lg')" class="bg-white w-full">
       <UiButton
         variant="tertiary"
-        class="relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 rounded-md md:hidden"
+        class="relative text-black hover:text-orange-500 active:text-orange-700 rounded-md md:hidden"
         square
         data-testid="open-languageselect-button"
         :aria-label="t('languageSelector')"
-        @click="toggleLanguageSelect()"
+        @click="toggleLanguageSelect"
       >
         <SfIconLanguage />
       </UiButton>
       <UiButton
         variant="tertiary"
-        class="relative text-white hover:text-white active:text-white hover:bg-primary-800 active:bg-primary-700 rounded-md md:hidden"
+        class="relative text-black hover:text-orange-500 active:text-orange-700 rounded-md md:hidden"
         square
         @click="searchModalOpen"
         :aria-label="t('openSearchModalButtonLabel')"
@@ -143,64 +168,21 @@
       </UiButton>
     </div>
   </MegaMenu>
-  <LanguageSelector />
-  <UiModal
-    v-if="viewport.isGreaterOrEquals('md') && isAuthenticationOpen"
-    v-model="isAuthenticationOpen"
-    tag="section"
-    class="h-full md:w-[500px] md:h-fit m-0 p-0 overflow-y-auto"
-    aria-labelledby="login-modal"
-  >
-    <header>
-      <UiButton square variant="tertiary" class="absolute right-2 top-2" @click="closeAuthentication">
-        <SfIconClose />
-      </UiButton>
-    </header>
-    <LoginComponent v-if="isLogin" @change-view="isLogin = false" @logged-in="closeAuthentication" :is-modal="true" />
-    <Register v-else @change-view="isLogin = true" @registered="closeAuthentication" :is-modal="true" />
-  </UiModal>
-
-  <NuxtLazyHydrate v-if="viewport.isLessThan('lg')" when-idle>
-    <SfModal
-      v-model="isSearchModalOpen"
-      class="w-full h-full z-50"
-      tag="section"
-      role="dialog"
-      aria-labelledby="search-modal-title"
-    >
-      <header class="mb-4">
-        <UiButton square variant="tertiary" class="absolute right-4 top-2" @click="searchModalClose">
-          <SfIconClose class="text-neutral-500" />
-        </UiButton>
-        <h3 id="search-modal-title" class="absolute left-6 top-4 font-bold typography-headline-4 mb-4">
-          {{ t('search') }}
-        </h3>
-      </header>
-      <UiSearch :close="searchModalClose" />
-    </SfModal>
-  </NuxtLazyHydrate>
-  <LazyConfigurationDrawer v-if="showConfigurationDrawer" />
 </template>
 
 <script setup lang="ts">
 import {
   SfBadge,
   SfDropdown,
-  SfIconClose,
   SfIconLanguage,
   SfIconPerson,
-  SfIconSearch,
-  SfIconShoppingCart,
-  SfIconTune,
-  SfListItem,
-  SfModal,
   SfIconFavorite,
+  SfIconShoppingCart,
   useDisclosure,
 } from '@storefront-ui/vue';
-import LanguageSelector from '~/components/LanguageSelector/LanguageSelector.vue';
 import { paths } from '~/utils/paths';
+import { useCart, useWishlist, useCustomer } from '~/composables';
 
-const isLogin = ref(true);
 const { data: cart } = useCart();
 const { wishlistItemIds } = useWishlist();
 const cartItemsCount = ref(0);
@@ -217,49 +199,4 @@ const { toggle: toggleLanguageSelect, isOpen: isLanguageSelectOpen } = useLocali
 const { data: categoryTree } = useCategoryTree();
 const { data: user, isAuthorized, logout } = useCustomer();
 const viewport = useViewport();
-const runtimeConfig = useRuntimeConfig();
-
-const showConfigurationDrawer = runtimeConfig.public.showConfigurationDrawer;
-
-onNuxtReady(() => {
-  cartItemsCount.value = cart.value?.items?.reduce((price, { quantity }) => price + quantity, 0) ?? 0;
-});
-
-watch(
-  () => cart.value?.items,
-  (cartItems) => {
-    cartItemsCount.value = cartItems?.reduce((price, { quantity }) => price + quantity, 0) ?? 0;
-  },
-);
-
-watch(
-  () => isAuthenticationOpen.value,
-  async () => {
-    isLogin.value = true;
-  },
-);
-
-const logOut = async () => {
-  accountDropdownToggle();
-  await logout();
-  navigateTo(localePath(paths.home));
-};
-
-const accountDropdown = computed(() => [
-  {
-    label: t('account.heading'),
-    link: localePath(paths.account),
-  },
-  {
-    label: t('account.ordersAndReturns.section.myOrders'),
-    link: localePath(paths.accountMyOrders),
-  },
-  {
-    label: t('account.ordersAndReturns.section.returns'),
-    link: localePath(paths.accountReturns),
-  },
-  {
-    label: t('account.logout'),
-  },
-]);
 </script>
